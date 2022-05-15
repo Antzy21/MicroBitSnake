@@ -1,9 +1,16 @@
 from microbit import *
+from random import choice
 
 def set_pix(pos, turnOn = True, brightness = 9):
     if not turnOn:
         brightness = 0
     display.set_pixel(pos[0], pos[1], brightness)
+
+def growSnake(newPos, curSnake):
+    newSnake = [newPos]
+    newSnake.extend(curSnake)
+    set_pix(newPos, True)
+    return newSnake
 
 def moveSnake(newPos, curSnake):
     newSnake = [newPos]
@@ -34,17 +41,33 @@ def getDir(curDir):
     else:
         return curDir
     
+def getApple(snake):
+    positions = []
+    for i in range(5):
+        for j in range(5):
+            positions.append((i,j))
+    positions = list(filter(lambda x: x not in snake, positions))
+    apple = choice(positions)
+    set_pix(apple, brightness=2)
+    return apple
+    
 def main():
     # Init snake
     snake = [(2,3), (2,4)]
     set_pix(snake[0])
     set_pix(snake[1])
     curDir = 0
+    apple = getApple(snake)
 
     while True:
         sleep(1000)
         curDir = getDir(curDir)
         snakeHead = getSnakeHead(snake, curDir)
-        snake = moveSnake(snakeHead, snake)
+        
+        if snakeHead == apple:
+            snake = growSnake(snakeHead, snake)
+            apple = getApple(snake)
+        else:
+            snake = moveSnake(snakeHead, snake)
 
 main()
