@@ -1,9 +1,8 @@
 from microbit import *
 
-def set_pix(pos, turnOn = True):
-    brightness = 0
-    if turnOn:
-        brightness = 9
+def set_pix(pos, turnOn = True, brightness = 9):
+    if not turnOn:
+        brightness = 0
     display.set_pixel(pos[0], pos[1], brightness)
 
 def moveSnake(newPos, curSnake):
