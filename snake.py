@@ -58,16 +58,20 @@ def main():
     set_pix(snake[1])
     curDir = 0
     apple = getApple(snake)
+    gameOver = False
 
-    while True:
+    while not gameOver:
         sleep(1000)
         curDir = getDir(curDir)
         snakeHead = getSnakeHead(snake, curDir)
         
-        if snakeHead == apple:
+        if snakeHead in snake:
+            gameOver = True
+        elif snakeHead == apple:
             snake = growSnake(snakeHead, snake)
             apple = getApple(snake)
         else:
             snake = moveSnake(snakeHead, snake)
+    display.show(Image.SAD)
 
 main()
