@@ -26,10 +26,14 @@ def getSnakeHead(snake, curDir):
     return snakeHead
     
 def getDir(curDir):
-    if button_a.is_pressed():
+    if button_a.is_pressed() and button_b.is_pressed():
+        return curDir
+    elif button_a.is_pressed():
         return (curDir-1) % 4
     elif button_b.is_pressed():
         return (curDir+1) % 4
+    else:
+        return curDir
     
 def main():
     # Init snake
