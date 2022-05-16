@@ -59,6 +59,7 @@ def main():
     curDir = 0
     apple = getApple(snake)
     gameOver = False
+    playerWon = False
 
     while not gameOver:
         sleep(1000)
@@ -69,9 +70,17 @@ def main():
             gameOver = True
         elif snakeHead == apple:
             snake = growSnake(snakeHead, snake)
-            apple = getApple(snake)
+            if len(snake) == 25:
+                playerWon = True
+                gameOver = True
+            else:
+                apple = getApple(snake)
         else:
             snake = moveSnake(snakeHead, snake)
-    display.show(Image.SAD)
+    
+    if playerWon:
+        display.show(Image.HAPPY)
+    else:
+        display.show(Image.SAD)
 
 main()
