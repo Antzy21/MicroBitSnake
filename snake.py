@@ -48,7 +48,7 @@ def getApple(snake):
             positions.append((i,j))
     positions = list(filter(lambda x: x not in snake, positions))
     apple = choice(positions)
-    set_pix(apple, brightness=2)
+    set_pix(apple, brightness=6)
     return apple
     
 def end(snakeLen, won = False):
