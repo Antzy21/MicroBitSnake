@@ -51,6 +51,16 @@ def getApple(snake):
     set_pix(apple, brightness=2)
     return apple
     
+def end(snakeLen, won = False):
+    while True:
+        display.show(snakeLen)
+        sleep(1000)
+        if won:
+            display.show(Image.HAPPY)
+        else:
+            display.show(Image.SAD)
+        sleep(1000)
+        
 def main():
     # Init snake
     snake = [(2,3), (2,4)]
@@ -78,9 +88,6 @@ def main():
         else:
             snake = moveSnake(snakeHead, snake)
     
-    if playerWon:
-        display.show(Image.HAPPY)
-    else:
-        display.show(Image.SAD)
+    end(len(snake), playerWon)
 
 main()
