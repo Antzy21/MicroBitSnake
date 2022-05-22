@@ -54,7 +54,7 @@ def getApple(snake):
 def end(snakeLen, won = False):
     while True:
         display.show(snakeLen)
-        sleep(1000)
+        sleep(5000)
         if won:
             display.show(Image.HAPPY)
         else:
